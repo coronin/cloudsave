@@ -6,41 +6,41 @@
 if(typeof btoa == 'undefined'){
 
   btoa = function (input) {
-	  var output = "", i = 0, l = input.length,
-	  key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", 
-	  chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-	  while (i < l) {
-		  chr1 = input.charCodeAt(i++);
-		  chr2 = input.charCodeAt(i++);
-		  chr3 = input.charCodeAt(i++);
-		  enc1 = chr1 >> 2;
-		  enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-		  enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-		  enc4 = chr3 & 63;
-		  if (isNaN(chr2)) enc3 = enc4 = 64;
-		  else if (isNaN(chr3)) enc4 = 64;
-		  output = output + key.charAt(enc1) + key.charAt(enc2) + key.charAt(enc3) + key.charAt(enc4);
-	  }
-	  return output;
+      var output = "", i = 0, l = input.length,
+      key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", 
+      chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+      while (i < l) {
+          chr1 = input.charCodeAt(i++);
+          chr2 = input.charCodeAt(i++);
+          chr3 = input.charCodeAt(i++);
+          enc1 = chr1 >> 2;
+          enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+          enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+          enc4 = chr3 & 63;
+          if (isNaN(chr2)) enc3 = enc4 = 64;
+          else if (isNaN(chr3)) enc4 = 64;
+          output = output + key.charAt(enc1) + key.charAt(enc2) + key.charAt(enc3) + key.charAt(enc4);
+      }
+      return output;
   }
 
   atob = function(input){
     var output = "", i = 0, l = input.length,
-	  key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", 
-	  chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-	  while (i < l) {
-		  enc1 = key.indexOf(input.charAt(i++));
-		  enc2 = key.indexOf(input.charAt(i++));
-		  enc3 = key.indexOf(input.charAt(i++));
-		  enc4 = key.indexOf(input.charAt(i++));
-		  chr1 = (enc1 << 2) | (enc2 >> 4);
-		  chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-		  chr3 = ((enc3 & 3) << 6) | enc4;
-		  output = output + String.fromCharCode(chr1);
-		  if (enc3 != 64) output = output + String.fromCharCode(chr2);
-		  if (enc4 != 64) output = output + String.fromCharCode(chr3);
-	  }
-	  return output;
+      key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", 
+      chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+      while (i < l) {
+          enc1 = key.indexOf(input.charAt(i++));
+          enc2 = key.indexOf(input.charAt(i++));
+          enc3 = key.indexOf(input.charAt(i++));
+          enc4 = key.indexOf(input.charAt(i++));
+          chr1 = (enc1 << 2) | (enc2 >> 4);
+          chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+          chr3 = ((enc3 & 3) << 6) | enc4;
+          output = output + String.fromCharCode(chr1);
+          if (enc3 != 64) output = output + String.fromCharCode(chr2);
+          if (enc4 != 64) output = output + String.fromCharCode(chr3);
+      }
+      return output;
   }
 
 }
@@ -86,8 +86,8 @@ XMLHttpRequest.prototype.sendMultipart = function(params) {
     console.log('actual data entity', file);
     
     xhr.upload.addEventListener('progress', function(evt){
-  		uploadProgress(file.url, evt);
-	  }, false)
+          uploadProgress(file.url, evt);
+      }, false)
 
     append("; filename=\""+file.name+"\"" + rn + "Content-type: "+file.type);
 
@@ -96,7 +96,7 @@ XMLHttpRequest.prototype.sendMultipart = function(params) {
     if(binxhr){
       append(file.data);
     }else if(abuf){
-    	append(file.data);
+        append(file.data);
     }else{
       var bin = file.data
       var arr = new Uint8Array(bin.length);
@@ -115,7 +115,7 @@ XMLHttpRequest.prototype.sendMultipart = function(params) {
     if(binxhr){
       xhr.sendAsBinary(req);
     }else{
-    	superblob = req.getBlob();
+        superblob = req.getBlob();
       xhr.send(superblob);
     }
   });

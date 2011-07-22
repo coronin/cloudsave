@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Cloud Save Settings</title>
+    <title>Cloud Save Button Settings</title>
     <style>
       body {
         font-family: sans-serif, helvetica, arial;
@@ -14,56 +14,37 @@
 
   </head>
   <body>
-    <h2 id="progress">Cloud Save Settings</h2>
+    <h2 id="head">Cloud Save Button (via drag2up)</h2>
     <p>
-    	Please excuse the fact that this settings page is mostly empty.
+	  all authorization via <a href="https://github.com/antimatter15/drag2up" rel="external">drag2up</a>
     </p>
     <p>
-      <input type="checkbox" id="moar" onchange="toggle_additional(this.checked)"> <label for="moar">Enable Additional Hosts</label>
-    </p>
-		<p>
-		Local File Upload (Beta):
-		</p>
+      <a href="https://github.com/coronin/cloudsave" rel="external">this extension</a> is made by <a href="http://twitter.com/cail" rel="external">@cail</a> to suit his own needs
+	</p>
+    <h3 id="options">Settings</h3>
     <p>
-    	<select id="hostselect"></select>
-    	<input type="file" onchange="upload(this.files)" multiple>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="clouddrive"> <label>Send to "Amazon Cloud"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="box"> <label>Send to "Box.net"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="cloudapp"> <label>Send to "CloudApp"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="dropbox"> <label>Send to "Dropbox"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="droplr"> <label>Send to "Droplr"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="gdocs"> <label>Send to "Google Docs"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="minus"> <label>Send to "Min.us"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="skydrive"> <label>Send to "SkyDrive"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="sugarsync"> <label>Send to "SugarSync"</label><br/>
+      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="webdav"> <label>Send to "WebDAV"</label><br/>
     </p>
     <script>
-    	function toggle_additional(state){
-    		localStorage.additional = state ? 'yes': '';
-	    	chrome.extension.getBackgroundPage().install_additional(state);
-    	}
-    	document.getElementById('moar').checked = localStorage.additional=='yes'
-    	
-    	var titles = chrome.extension.getBackgroundPage().title_map;
-    	for(var host in titles){
-    		var opt = document.createElement('option');
-    		opt.innerHTML = titles[host];
-    		opt.value = host;
-    		document.getElementById('hostselect').appendChild(opt);
-    	}
-    	
-    	function upload(files){
-    		for(var i = 0; i < files.length; i++){
-    			var url, file = files[i];
-    			if(window.createObjectURL){
-            url = window.createObjectURL(file)
-          }else if(window.createBlobURL){
-            url = window.createBlobURL(file)
-          }else if(window.URL && window.URL.createObjectURL){
-            url = window.URL.createObjectURL(file)
-          }else if(window.webkitURL && window.webkitURL.createObjectURL){
-            url = window.webkitURL.createObjectURL(file)
-          }
-				  chrome.extension.getBackgroundPage().upload(document.getElementById('hostselect').value, url, file.name);
-    		}
-    	}
-			
+      function toggle_service(state) {
+        localStorage.service = state;
+        document.getElementById(state).checked = true;
+      }
+      toggle_service(localStorage.service || 'dropbox')
     </script>    
     <hr>
-    <div style="font-size: small">
-      Part of the <a href="https://github.com/antimatter15/cloudsave">Cloud Save project</a>. Written by <a href="http://twitter.com/antimatter15">@antimatter15</a> (please follow me on twitter). Email comments and concerns to antimatter15@gmail.com.
-    </div>
 
+    <div style="font-size: small">
+      based on <a href="https://github.com/antimatter15/cloudsave" rel="external">Cloud Save project</a> (work of <a href="http://twitter.com/antimatter15" rel="external">@antimatter15</a>)
+    </div>
   </body>
 </html>

@@ -1,10 +1,23 @@
 <script>
-	window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+    window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
 
-	Blob.prototype.slice = Blob.prototype.slice || function(start, length) {
-		return this.webkitSlice(start, start + length);
-	}
-	
+    Blob.prototype.slice = Blob.prototype.slice || function(start, length) {
+        return this.webkitSlice(start, start + length);
+    }
+
+  function checkForValidUrl(tabId, changeInfo, tab) {
+    var urlLow = tab.url.toLowerCase();
+    if (urlLow.indexOf('pdf') > -1 || urlLow.indexOf('jpg') > -1 || urlLow.indexOf('png') > -1 || urlLow.indexOf('tif') > -1) {
+      chrome.pageAction.show(tabId);
+    }
+  }
+  chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+  chrome.pageAction.onClicked.addListener(function(tab) {
+    chrome.pageAction.setIcon({path: 'icon/64yay.png',
+                               tabId: tab.id});
+    handle_click(tab);
+  });
 </script>
 <script src="background.js"></script>
 <script src="cloudsave.js"></script>

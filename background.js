@@ -1,5 +1,5 @@
 function loginTab(loginurl, string, cb){
-	if(typeof chrome != 'undefined'){
+    if(typeof chrome != 'undefined'){
     chrome.tabs.create({
       url: loginurl
     }, function(tab){
@@ -72,17 +72,17 @@ function getURL(type, request, callback, sync){
     
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function(evt){
-  		downloadProgress(request.url, evt);
-  	}, false)
+          downloadProgress(request.url, evt);
+      }, false)
   
     xhr.open('GET', request.url, !sync);
     if(type == 'binary' || type == 'raw'){
       xhr.overrideMimeType('text/plain; charset=x-user-defined'); //should i loop through and do that & 0xff?
     }
     if(type == 'arraybuffer'){
-    	console.log('Setting Type ArrayBuffer');
-			xhr.responseType = 'arraybuffer';
-		}
+        console.log('Setting Type ArrayBuffer');
+            xhr.responseType = 'arraybuffer';
+        }
     
     if(sync){
       xhr.send();
@@ -130,10 +130,10 @@ function getURL(type, request, callback, sync){
         var data = xhr.responseText;
         callback({id: request.id, data: data, type: request.type, size: data.length, name: request.name, url: request.url});
       }else if(type == 'arraybuffer'){
-      	var data = xhr.response;
+          var data = xhr.response;
         callback({id: request.id, data: data, type: request.type, size: data.length, name: request.name, url: request.url});
       }else{
-      	var raw = xhr.responseText;
+          var raw = xhr.responseText;
         callback({id: request.id, data: raw, type: request.type, size: data.length, name: request.name, url: request.url});
       }
     }
@@ -156,20 +156,20 @@ function getBinary(request, callback){
 
 
 function getBuffer(request, callback){
-	var tmp = new XMLHttpRequest();
-	var abuf = 'responseType' in tmp && 'response' in tmp;
-	console.log('Testing for array bufs', abuf);
-	getURL(abuf?'arraybuffer':'raw', request, function(file){
-		console.log(abuf, file);
-		if(abuf){
-			callback(file)
-		}else{
-			var bin = file.data
-		  var arr = new Uint8Array(bin.length);
-		  for(var i = 0, l = bin.length; i < l; i++)
-		    arr[i] = bin.charCodeAt(i);
-		  file.data = arr.buffer;
-		  callback(file);
-		}
-	})
+    var tmp = new XMLHttpRequest();
+    var abuf = 'responseType' in tmp && 'response' in tmp;
+    console.log('Testing for array bufs', abuf);
+    getURL(abuf?'arraybuffer':'raw', request, function(file){
+        console.log(abuf, file);
+        if(abuf){
+            callback(file)
+        }else{
+            var bin = file.data
+          var arr = new Uint8Array(bin.length);
+          for(var i = 0, l = bin.length; i < l; i++)
+            arr[i] = bin.charCodeAt(i);
+          file.data = arr.buffer;
+          callback(file);
+        }
+    })
 }
