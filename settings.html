@@ -11,28 +11,28 @@
         background-position: 30px 30px;
       }
     </style>
-
   </head>
   <body>
     <h2 id="head">Cloud Save Button (via drag2up)</h2>
     <p>
-	  all authorization via <a href="https://github.com/antimatter15/drag2up" rel="external">drag2up</a>
+      all authorization via <a href="https://github.com/antimatter15/drag2up" rel="external">drag2up</a>
     </p>
     <p>
       <a href="https://github.com/coronin/cloudsave" rel="external">this extension</a> is made by <a href="http://twitter.com/cail" rel="external">@cail</a> to suit his own needs
-	</p>
-    <h3 id="options">Settings</h3>
+    </p>
     <p>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="clouddrive"> <label>Send to "Amazon Cloud"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="box"> <label>Send to "Box.net"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="cloudapp"> <label>Send to "CloudApp"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="dropbox"> <label>Send to "Dropbox"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="droplr"> <label>Send to "Droplr"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="gdocs"> <label>Send to "Google Docs"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="minus"> <label>Send to "Min.us"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="skydrive"> <label>Send to "SkyDrive"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="sugarsync"> <label>Send to "SugarSync"</label><br/>
-      <input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="webdav"> <label>Send to "WebDAV"</label><br/>
+      <span style="font-weight:bold;font-size:1.2em">send the file : </span><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="clouddrive"> <label> to "Amazon Cloud"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="box"> <label> to "Box.net"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="cloudapp"> <label> to "CloudApp"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="dropbox"> <label> to "Dropbox"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="droplr"> <label> to "Droplr"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="gdocs"> <label> to "Google Docs"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="hotfile"> <label> to "Hotfile"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="minus"> <label> to "Min.us"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="skydrive"> <label> to "SkyDrive"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="sugarsync"> <label> to "SugarSync"</label><br/>
+      &nbsp;&nbsp;<input type="radio" name="cloud_service" onchange="toggle_service(this.id)" id="webdav"> <label> to "WebDAV"</label><br/>
     </p>
     <script>
       function toggle_service(state) {
@@ -41,6 +41,11 @@
       }
       toggle_service(localStorage.service || 'dropbox')
     </script>    
+    <hr>
+
+    <p>
+      <i>What if upload fail or the progress bar stall?</i> <button onclick="var answer = confirm('really?'); if (answer) localStorage.clear();">clean cache</button> and try again
+    </p>
     <hr>
 
     <div style="font-size: small">
