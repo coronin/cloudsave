@@ -69,7 +69,7 @@ function getURL(type, request, callback, sync) {
     });
 
     //callback(new dFile(data, name, mime, id, size)
-  }else{
+  } else {
     
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('progress', function (evt) {
@@ -93,17 +93,19 @@ function getURL(type, request, callback, sync) {
       if(!request.type) request.type = xhr.getResponseHeader("Content-Type");
     
       console.log('opened via xhr ', request.url);
-      var data = '';
+      var data = '', raw;
 
-      if(type === 'binary'){
+      if (type === 'binary') {
         //*
 
-        if(typeof BlobBuilder === 'undefined'){
-          for (var raw = xhr.responseText, l = raw.length, i = 0, data = ''; i < l; i++) data += String.fromCharCode(raw.charCodeAt(i) & 0xff);
+        if (typeof BlobBuilder === 'undefined') {
+          for (raw = xhr.responseText, l = raw.length, i = 0; i < l; i++) {
+            data += String.fromCharCode(raw.charCodeAt(i) & 0xff);
+          }
           callback({id: request.id, data: data, type: request.type, size: data.length, name: request.name, url: request.url});
 
-        }else{
-          var bb = new BlobBuilder();//this webworker is totally overkill
+        } else {
+          var bb = new BlobBuilder(); // this webworker is totally overkill
           bb.append("onmessage = function (e) { for (var raw = e.data, l = raw.length, i = 0, data = ''; i < l; i++) data += String.fromCharCode(raw.charCodeAt(i) & 0xff); postMessage(data); }");
           var url;
           if (window.createObjectURL) {
@@ -126,16 +128,16 @@ function getURL(type, request, callback, sync) {
 
         //*/
       } else if (type === 'raw') {
-        var data = xhr.responseText;
+        data = xhr.responseText;
         callback({id: request.id, data: data, type: request.type, size: data.length, name: request.name, url: request.url});
       } else if (type === 'arraybuffer') {
-        var data = xhr.response;
+        data = xhr.response;
         callback({id: request.id, data: data, type: request.type, size: data.length, name: request.name, url: request.url});
       } else {
-        var raw = xhr.responseText;
+        raw = xhr.responseText;
         callback({id: request.id, data: raw, type: request.type, size: data.length, name: request.name, url: request.url});
       }
-    }
+    };
     xhr.send();
   }
 }

@@ -22,7 +22,7 @@ if(typeof btoa === 'undefined'){
       output = output + key.charAt(enc1) + key.charAt(enc2) + key.charAt(enc3) + key.charAt(enc4);
     }
     return output;
-  }
+  };
 
   atob = function(input){
     var output = '', i = 0, l = input.length,
@@ -41,7 +41,7 @@ if(typeof btoa === 'undefined'){
       if (enc4 !== 64) output = output + String.fromCharCode(chr3);
     }
     return output;
-  }
+  };
 
 }
 
@@ -54,10 +54,14 @@ XMLHttpRequest.prototype.sendMultipart = function (params) {
   var abuf = 'responseType' in tmp && 'response' in tmp;
 
   var binxhr = !!this.sendAsBinary;
+  
+  var req;
   if (binxhr) {
-    var req = '', append = function (data) { req += data };
+    req = '';
+    append = function (data) { req += data; };
   } else {
-    var req = new BlobBuilder(), append = function (data) { req.append(data); };
+    req = new BlobBuilder();
+    append = function (data) { req.append(data); };
   }
 
   append('--' + BOUNDARY);
@@ -65,7 +69,8 @@ XMLHttpRequest.prototype.sendMultipart = function (params) {
   var file_param = -1;
   var xhr = this;
 
-  for (var i in params) {
+  var i;
+  for (i in params) {
     if (typeof params[i] === 'object') {
       file_param = i;
     } else {
@@ -73,8 +78,8 @@ XMLHttpRequest.prototype.sendMultipart = function (params) {
       append(rn + rn + params[i] + rn + '--' + BOUNDARY);
     }
   }
-  
-  var i = file_param;
+
+  i = file_param;
   
   append(rn + 'Content-Disposition: form-data; name="' + i + '"');
   

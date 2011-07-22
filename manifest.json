@@ -20,5 +20,7 @@
     "64": "icon/64.png",
     "128": "icon/128.png",
     "512": "icon/512.png"
-  }
+  },
+  "default_locale": "en",
+  "minimum_chrome_version": "9"
 }
