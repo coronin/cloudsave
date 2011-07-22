@@ -68,7 +68,7 @@ function handle_click(tab) {
              ).replace(/\+/g, ' ');
   console.log('Processed name', name);
 
-  var host = localStorage.service || 'dropbox';
+  var host = localStorage.cloudsave_service || 'dropbox';
   if (Hosts[host]) {
 
     if (host === 'dropbox' && localStorage.folder_prefix) {
