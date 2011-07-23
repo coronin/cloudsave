@@ -1,6 +1,6 @@
 {
   "name": "Cloud Save Button (via drag2up)",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Here is a button - press and save the file to cloud",
   "background_page": "cloudsave.html",
   "permissions": [
@@ -21,6 +21,5 @@
     "128": "icon/128.png",
     "512": "icon/512.png"
   },
-  "default_locale": "en",
   "minimum_chrome_version": "9"
 }

@@ -54,7 +54,7 @@ XMLHttpRequest.prototype.sendMultipart = function (params) {
   var abuf = 'responseType' in tmp && 'response' in tmp;
 
   var binxhr = !!this.sendAsBinary;
-  
+
   var req;
   if (binxhr) {
     req = '';

@@ -160,7 +160,7 @@ function upload(host, url, name) {
   var notification = webkitNotifications.createHTMLNotification('popup.html?' + id);
 
   notification.ondisplay = function () {
-    updateNotification(id, 'icon/throbber.gif', 
+    updateNotification(id, 'icon/loading.gif', 
       'The file "' + wbr(name, 8) + '" is being saved to "' + host + '" ...');
     updateNotification(id, INDETERMINATE);
   };
